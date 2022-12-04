@@ -161,6 +161,7 @@
             this.pictureBox1.Size = new System.Drawing.Size(40, 192);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Tag = "wall";
             // 
             // pictureBox2
             // 
@@ -170,6 +171,7 @@
             this.pictureBox2.Size = new System.Drawing.Size(40, 192);
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
+            this.pictureBox2.Tag = "wall";
             // 
             // pictureBox3
             // 
@@ -179,6 +181,7 @@
             this.pictureBox3.Size = new System.Drawing.Size(40, 192);
             this.pictureBox3.TabIndex = 1;
             this.pictureBox3.TabStop = false;
+            this.pictureBox3.Tag = "wall";
             // 
             // pictureBox4
             // 
@@ -188,6 +191,7 @@
             this.pictureBox4.Size = new System.Drawing.Size(40, 192);
             this.pictureBox4.TabIndex = 2;
             this.pictureBox4.TabStop = false;
+            this.pictureBox4.Tag = "wall";
             // 
             // redGhost
             // 
@@ -198,7 +202,7 @@
             this.redGhost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.redGhost.TabIndex = 3;
             this.redGhost.TabStop = false;
-            this.redGhost.Tag = "redGhost";
+            this.redGhost.Tag = "ghost";
             // 
             // yellowGhost
             // 
@@ -209,7 +213,7 @@
             this.yellowGhost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.yellowGhost.TabIndex = 4;
             this.yellowGhost.TabStop = false;
-            this.yellowGhost.Tag = "redGhost";
+            this.yellowGhost.Tag = "ghost";
             // 
             // pinkGhost
             // 
@@ -220,7 +224,7 @@
             this.pinkGhost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pinkGhost.TabIndex = 5;
             this.pinkGhost.TabStop = false;
-            this.pinkGhost.Tag = "redGhost";
+            this.pinkGhost.Tag = "ghost";
             // 
             // pacman
             // 
@@ -807,7 +811,7 @@
             this.Controls.Add(this.txtScore);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
-            this.Tag = "wall";
+            this.Tag = "";
             this.Text = "Pacman Game";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyIsDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.keyIsUp);

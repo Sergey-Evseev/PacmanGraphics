@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -62,7 +63,7 @@ namespace PacmanGraphics
                 goRight = false;
             }
         }
-        //метод-обработчик таймера
+        //МЕТОД-ОБРАБОТЧИК ТАЙМЕРА
 
         private void mainGameTimer(object sender, EventArgs e)
         {
@@ -106,7 +107,61 @@ namespace PacmanGraphics
             {
                 pacman.Top = 0;
             }
-        } //end of: private void mainGameTimer
+            foreach (Control x in this.Controls) //перебирая все контролы формы
+                //на каждой итерации таймера
+            {
+                if (x is PictureBox) //отбираем только пикчербоксы
+                {
+                    //ВЗАИМОДЕЙСТВИЕ С МОНЕТАМИ
+                    //приводим к строке и сравниваем тег контрола
+                    //счет увеличивается только когда объект видимый
+                    //чтобы счет увеличивался только один раз
+                    if ((string)x.Tag == "coin" && x.Visible == true) 
+                    {
+                        //если границы игрока пересекаются с монетой
+                        if (pacman.Bounds.IntersectsWith(x.Bounds))
+                        {   
+                            score+=1; //счет увеличить на единицу
+                            x.Visible = false; //монету сделать невидимой
+                        }
+                    }
+                    //ВЗАИМОДЕЙСТВИЕ С ВНУТРЕННИМИ СТЕНАМИ
+                    if ((string)x.Tag == "wall")
+                    {
+                        if (pacman.Bounds.IntersectsWith(x.Bounds))
+                        {
+                            //игра закончена
+                            //this.Close();
+                        }
+                    }
+                    //взаимодействие с привидениями
+                    if ((string)x.Tag == "ghost")
+                    {
+                        if (pacman.Bounds.IntersectsWith(x.Bounds))
+                        { //игра закончена
+                        
+                        }
+                    }
+                }    
+            } // end of: foreach PictureBox
+
+            //MOVING GHOSTS
+            //поведение красного госта
+            //по счету таймера менять положение госта на величину его скорости
+            redGhost.Left += redGhostSpeed;
+            //Bounds returns rectangle with location and sizes of object
+            if (redGhost.Bounds.IntersectsWith(pictureBox1.Bounds) ||
+                redGhost.Bounds.IntersectsWith(pictureBox2.Bounds))
+                { //при соприкосновении со стенками менять направление скороси
+                redGhostSpeed = -redGhostSpeed;
+                }
+
+            if (score == 46)
+            { //игра закончена
+            
+            }
+
+        } //end of: private void mainGameTimer ======================
 
         // обработчик таймера с ограничением движения игрока стенками 
         //private void mainGameTimer(object sender, EventArgs e)
@@ -154,7 +209,8 @@ namespace PacmanGraphics
             pinkGhost.Left = 582; pinkGhost.Top = 248;
             yellowGhost.Left = 444; yellowGhost.Top = 448;
 
-            foreach (Control x in this.Controls) //сделать все элементы видимыми
+            //сделать все элементы (coins) видимыми
+            foreach (Control x in this.Controls) 
                 if (x is PictureBox)
                 {
                     x.Visible = true;
@@ -163,7 +219,7 @@ namespace PacmanGraphics
             gameTimer.Start(); //таймер запускается
         }
 
-        //accept message either 'win' or 'lost'
+        //accepts message either 'win' or 'lost'
         private void gameOver(string message)
         { 
         
