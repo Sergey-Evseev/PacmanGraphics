@@ -63,26 +63,27 @@ namespace PacmanGraphics
             }
         }
         //метод-обработчик таймера
+
         private void mainGameTimer(object sender, EventArgs e)
         {
             txtScore.Text = "Score: " + score;
 
-            if (goLeft) 
+            if (goLeft)
             {   //при нажатии влево уменьшать координату X на скорость
                 pacman.Left -= playerSpeed;
                 pacman.Image = Properties.Resources.left;
             }
-            if (goRight) 
+            if (goRight)
             {
                 pacman.Left += playerSpeed;
                 pacman.Image = Properties.Resources.right;
             }
-            if (goUp) 
-            { 
+            if (goUp)
+            {
                 pacman.Top -= playerSpeed;
                 pacman.Image = Properties.Resources.Up;
             }
-            if (goDown) 
+            if (goDown)
             {
                 pacman.Top += playerSpeed;
                 pacman.Image = Properties.Resources.down;
@@ -97,7 +98,42 @@ namespace PacmanGraphics
             {
                 pacman.Left = -10;
             }
-        }
+            if (pacman.Top < -10) //при уходе вверх
+            {
+                pacman.Top = 550;
+            }
+            if (pacman.Top > 550) // при уходе вниз
+            {
+                pacman.Top = 0;
+            }
+        } //end of: private void mainGameTimer
+
+        // обработчик таймера с ограничением движения игрока стенками 
+        //private void mainGameTimer(object sender, EventArgs e)
+        //{ 
+        //    txtScore.Text = "Score: " + score;
+
+        //    if (goLeft && pacman.Left > 0)
+        //    {                   
+        //        pacman.Image = Properties.Resources.left;                
+        //        pacman.Left -= playerSpeed;
+        //    }
+        //    if (goRight && pacman.Left < 635)
+        //    {
+        //        pacman.Image = Properties.Resources.right;
+        //        pacman.Left += playerSpeed;                
+        //    }
+        //    if (goUp && pacman.Top > 0)
+        //    {
+        //        pacman.Image = Properties.Resources.Up;
+        //        pacman.Top -= playerSpeed;                
+        //    }
+        //    if (goDown && pacman.Top < 510)
+        //    {
+        //        pacman.Image = Properties.Resources.down;
+        //        pacman.Top += playerSpeed;                
+        //    }            
+        //} //end of: private void mainGameTimer
 
         private void resetGame()
         {
