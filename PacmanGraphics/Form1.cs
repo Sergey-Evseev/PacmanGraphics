@@ -41,7 +41,8 @@ namespace PacmanGraphics
                 goRight = true;
             }
         }
-
+        //когда клавиша направления отпущена переменные направления 
+        //меняются на false 
         private void keyIsUp(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Up)
@@ -61,20 +62,54 @@ namespace PacmanGraphics
                 goRight = false;
             }
         }
-
+        //метод-обработчик таймера
         private void mainGameTimer(object sender, EventArgs e)
         {
+            txtScore.Text = "Score: " + score;
 
+            if (goLeft) 
+            {   //при нажатии влево уменьшать координату X на скорость
+                pacman.Left -= playerSpeed;
+                pacman.Image = Properties.Resources.left;
+            }
+            if (goRight) 
+            {
+                pacman.Left += playerSpeed;
+                pacman.Image = Properties.Resources.right;
+            }
+            if (goUp) 
+            { 
+                pacman.Top -= playerSpeed;
+                pacman.Image = Properties.Resources.Up;
+            }
+            if (goDown) 
+            {
+                pacman.Top += playerSpeed;
+                pacman.Image = Properties.Resources.down;
+            }
+            //телепорт на правую сторону при уходе в левую стенку
+            if (pacman.Left < -10)
+            {
+                pacman.Left = 680;
+            }
+            //телепорт налево при уходе в правую стенку
+            if (pacman.Left > 680)
+            {
+                pacman.Left = -10;
+            }
         }
 
         private void resetGame()
         {
             txtScore.Text = "Score: 0";
             score = 0;
+
             redGhostSpeed = 5;
             yellowGhostSpeed = 5;
             pinkGhostX = 5;
             pinkGhostY = 5;
+            playerSpeed = 8;
+
             isGameOver = false;
 
             pacman.Left = 31; //координаты героя в начале игры
@@ -89,7 +124,7 @@ namespace PacmanGraphics
                     x.Visible = true;
                 }
 
-            gameTimer.Start();
+            gameTimer.Start(); //таймер запускается
         }
 
         //accept message either 'win' or 'lost'
