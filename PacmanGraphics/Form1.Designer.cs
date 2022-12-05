@@ -86,6 +86,8 @@
             this.pictureBox50 = new System.Windows.Forms.PictureBox();
             this.pictureBox51 = new System.Windows.Forms.PictureBox();
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
+            this.gameResult = new System.Windows.Forms.Label();
+            this.playAgain = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -750,12 +752,34 @@
             this.gameTimer.Interval = 20;
             this.gameTimer.Tick += new System.EventHandler(this.mainGameTimer);
             // 
+            // gameResult
+            // 
+            this.gameResult.AutoSize = true;
+            this.gameResult.Font = new System.Drawing.Font("Yandex Sans Text Bold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.gameResult.ForeColor = System.Drawing.Color.White;
+            this.gameResult.Location = new System.Drawing.Point(296, 201);
+            this.gameResult.Name = "gameResult";
+            this.gameResult.Size = new System.Drawing.Size(0, 33);
+            this.gameResult.TabIndex = 14;
+            // 
+            // playAgain
+            // 
+            this.playAgain.AutoSize = true;
+            this.playAgain.Font = new System.Drawing.Font("Yandex Sans Text Bold", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.playAgain.ForeColor = System.Drawing.Color.White;
+            this.playAgain.Location = new System.Drawing.Point(205, 321);
+            this.playAgain.Name = "playAgain";
+            this.playAgain.Size = new System.Drawing.Size(0, 33);
+            this.playAgain.TabIndex = 14;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(684, 562);
+            this.Controls.Add(this.playAgain);
+            this.Controls.Add(this.gameResult);
             this.Controls.Add(this.pacman);
             this.Controls.Add(this.pinkGhost);
             this.Controls.Add(this.yellowGhost);
@@ -811,8 +835,10 @@
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.txtScore);
+            this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.ShowIcon = false;
             this.Tag = "";
             this.Text = "Pacman Game";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.keyIsDown);
@@ -934,6 +960,8 @@
         private System.Windows.Forms.PictureBox pictureBox50;
         private System.Windows.Forms.PictureBox pictureBox51;
         private System.Windows.Forms.Timer gameTimer;
+        private System.Windows.Forms.Label gameResult;
+        private System.Windows.Forms.Label playAgain;
     }
 }
 

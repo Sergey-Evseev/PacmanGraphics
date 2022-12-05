@@ -62,6 +62,12 @@ namespace PacmanGraphics
             {
                 goRight = false;
             }
+
+            //повторный запуск игры
+            if (e.KeyCode == Keys.Enter && isGameOver==true)
+            {
+                resetGame();
+            }
         }
         //МЕТОД-ОБРАБОТЧИК ТАЙМЕРА ======================================================
 
@@ -130,14 +136,13 @@ namespace PacmanGraphics
                     {
                         if (pacman.Bounds.IntersectsWith(x.Bounds))
                         {
-                            //игра закончена
-                            //this.Close();
+                            gameOver("You lost!");
                         }
 
                         //ДОПОЛН. поведение розового госта
                         if (pinkGhost.Bounds.IntersectsWith(x.Bounds))
                         { //при столкновении с внутр. стенами менять направление                                                                             
-                            pinkGhostY = -pinkGhostY;                            
+                            pinkGhostX = -pinkGhostX;                            
                         }                        
                     }
                     
@@ -145,8 +150,8 @@ namespace PacmanGraphics
                     if ((string)x.Tag == "ghost")
                     {
                         if (pacman.Bounds.IntersectsWith(x.Bounds))
-                        { //игра закончена
-                        
+                        {
+                            gameOver("You lost!");
                         }
                     }
                 }    
@@ -188,10 +193,8 @@ namespace PacmanGraphics
             //если собраны все монетки
             if (score == 46)
             {
-                gameOver("You win!"); //передаем в метод строку для определения 
-            }                         //работы метода и вывода сообщения                                               
-
-
+                gameOver("You win!"); //передаем в метод строку для вывода сообщения
+            }
 
         } //end of: private void mainGameTimer ===========================================
 
@@ -227,6 +230,9 @@ namespace PacmanGraphics
             txtScore.Text = "Score: 0";
             score = 0;
 
+            gameResult.Text = "";
+            playAgain.Text = "";
+
             redGhostSpeed = 5;
             yellowGhostSpeed = 5;
             pinkGhostX = 5;
@@ -256,8 +262,10 @@ namespace PacmanGraphics
         {
             isGameOver = true;
             gameTimer.Stop();
-            txtScore.Text += (Environment.NewLine + message);
-
+            
+            txtScore.Text = "Score: " + score; //вывод очков 
+            gameResult.Text = message; //вывод строки с результатом
+            playAgain.Text = "Press Enter to play again!";
         }
     }
 }
