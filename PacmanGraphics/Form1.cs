@@ -63,7 +63,7 @@ namespace PacmanGraphics
                 goRight = false;
             }
         }
-        //МЕТОД-ОБРАБОТЧИК ТАЙМЕРА
+        //МЕТОД-ОБРАБОТЧИК ТАЙМЕРА ======================================================
 
         private void mainGameTimer(object sender, EventArgs e)
         {
@@ -125,7 +125,7 @@ namespace PacmanGraphics
                             x.Visible = false; //монету сделать невидимой
                         }
                     }
-                    //ВЗАИМОДЕЙСТВИЕ С ВНУТРЕННИМИ СТЕНАМИ
+                    //ВЗАИМОДЕЙСТВИЕ ИГРОКА С ВНУТРЕННИМИ СТЕНАМИ
                     if ((string)x.Tag == "wall")
                     {
                         if (pacman.Bounds.IntersectsWith(x.Bounds))
@@ -133,8 +133,15 @@ namespace PacmanGraphics
                             //игра закончена
                             //this.Close();
                         }
+
+                        //ДОПОЛН. поведение розового госта
+                        if (pinkGhost.Bounds.IntersectsWith(x.Bounds))
+                        { //при столкновении с внутр. стенами менять направление                                                                             
+                            pinkGhostY = -pinkGhostY;                            
+                        }                        
                     }
-                    //взаимодействие с привидениями
+                    
+                    //взаимодействие игрока с привидениями
                     if ((string)x.Tag == "ghost")
                     {
                         if (pacman.Bounds.IntersectsWith(x.Bounds))
@@ -156,12 +163,37 @@ namespace PacmanGraphics
                 redGhostSpeed = -redGhostSpeed;
                 }
 
-            if (score == 46)
-            { //игра закончена
-            
+            //поведение желтого госта аналогично но движется в другую сторону
+            //(скорости каждого прописаны в resetGame())
+            yellowGhost.Left -= yellowGhostSpeed;
+            if (yellowGhost.Bounds.IntersectsWith(pictureBox3.Bounds) ||
+                yellowGhost.Bounds.IntersectsWith(pictureBox4.Bounds))
+            { 
+                yellowGhostSpeed = -yellowGhostSpeed;
+            }
+            //поведение розового госта
+            pinkGhost.Left -= pinkGhostX; //изменение гор. координаты
+            pinkGhost.Top -= pinkGhostY; //изменение вертикальной координаты
+
+            if (pinkGhost.Top < 0 || pinkGhost.Top > 503)
+            {
+                pinkGhostY = -pinkGhostY;
+            }
+            if (pinkGhost.Left < 0 || pinkGhost.Left > 637)
+            {
+                pinkGhostX = -pinkGhostX;
             }
 
-        } //end of: private void mainGameTimer ======================
+
+            //если собраны все монетки
+            if (score == 46)
+            {
+                gameOver("You win!"); //передаем в метод строку для определения 
+            }                         //работы метода и вывода сообщения                                               
+
+
+
+        } //end of: private void mainGameTimer ===========================================
 
         // обработчик таймера с ограничением движения игрока стенками 
         //private void mainGameTimer(object sender, EventArgs e)
@@ -206,7 +238,7 @@ namespace PacmanGraphics
             pacman.Left = 31; //координаты героя в начале игры
             pacman.Top = 46;
             redGhost.Left = 189; redGhost.Top = 63;
-            pinkGhost.Left = 582; pinkGhost.Top = 248;
+            pinkGhost.Left = 309; pinkGhost.Top = 252;
             yellowGhost.Left = 444; yellowGhost.Top = 448;
 
             //сделать все элементы (coins) видимыми
@@ -221,8 +253,11 @@ namespace PacmanGraphics
 
         //accepts message either 'win' or 'lost'
         private void gameOver(string message)
-        { 
-        
+        {
+            isGameOver = true;
+            gameTimer.Stop();
+            txtScore.Text += (Environment.NewLine + message);
+
         }
     }
 }

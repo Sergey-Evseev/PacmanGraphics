@@ -195,6 +195,7 @@
             // 
             // redGhost
             // 
+            this.redGhost.BackColor = System.Drawing.Color.Black;
             this.redGhost.Image = global::PacmanGraphics.Properties.Resources.red_guy;
             this.redGhost.Location = new System.Drawing.Point(189, 63);
             this.redGhost.Name = "redGhost";
@@ -217,8 +218,9 @@
             // 
             // pinkGhost
             // 
+            this.pinkGhost.BackColor = System.Drawing.Color.Black;
             this.pinkGhost.Image = global::PacmanGraphics.Properties.Resources.pink_guy;
-            this.pinkGhost.Location = new System.Drawing.Point(582, 248);
+            this.pinkGhost.Location = new System.Drawing.Point(309, 252);
             this.pinkGhost.Name = "pinkGhost";
             this.pinkGhost.Size = new System.Drawing.Size(45, 60);
             this.pinkGhost.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -647,7 +649,7 @@
             // pictureBox43
             // 
             this.pictureBox43.Image = global::PacmanGraphics.Properties.Resources.coin;
-            this.pictureBox43.Location = new System.Drawing.Point(205, 272);
+            this.pictureBox43.Location = new System.Drawing.Point(149, 272);
             this.pictureBox43.Name = "pictureBox43";
             this.pictureBox43.Size = new System.Drawing.Size(25, 25);
             this.pictureBox43.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -658,7 +660,7 @@
             // pictureBox44
             // 
             this.pictureBox44.Image = global::PacmanGraphics.Properties.Resources.coin;
-            this.pictureBox44.Location = new System.Drawing.Point(156, 272);
+            this.pictureBox44.Location = new System.Drawing.Point(100, 272);
             this.pictureBox44.Name = "pictureBox44";
             this.pictureBox44.Size = new System.Drawing.Size(25, 25);
             this.pictureBox44.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -669,7 +671,7 @@
             // pictureBox45
             // 
             this.pictureBox45.Image = global::PacmanGraphics.Properties.Resources.coin;
-            this.pictureBox45.Location = new System.Drawing.Point(110, 272);
+            this.pictureBox45.Location = new System.Drawing.Point(54, 272);
             this.pictureBox45.Name = "pictureBox45";
             this.pictureBox45.Size = new System.Drawing.Size(25, 25);
             this.pictureBox45.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -680,7 +682,7 @@
             // pictureBox46
             // 
             this.pictureBox46.Image = global::PacmanGraphics.Properties.Resources.coin;
-            this.pictureBox46.Location = new System.Drawing.Point(345, 272);
+            this.pictureBox46.Location = new System.Drawing.Point(399, 272);
             this.pictureBox46.Name = "pictureBox46";
             this.pictureBox46.Size = new System.Drawing.Size(25, 25);
             this.pictureBox46.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -691,7 +693,7 @@
             // pictureBox47
             // 
             this.pictureBox47.Image = global::PacmanGraphics.Properties.Resources.coin;
-            this.pictureBox47.Location = new System.Drawing.Point(296, 272);
+            this.pictureBox47.Location = new System.Drawing.Point(240, 272);
             this.pictureBox47.Name = "pictureBox47";
             this.pictureBox47.Size = new System.Drawing.Size(25, 25);
             this.pictureBox47.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -702,7 +704,7 @@
             // pictureBox48
             // 
             this.pictureBox48.Image = global::PacmanGraphics.Properties.Resources.coin;
-            this.pictureBox48.Location = new System.Drawing.Point(250, 272);
+            this.pictureBox48.Location = new System.Drawing.Point(194, 272);
             this.pictureBox48.Name = "pictureBox48";
             this.pictureBox48.Size = new System.Drawing.Size(25, 25);
             this.pictureBox48.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -713,7 +715,7 @@
             // pictureBox49
             // 
             this.pictureBox49.Image = global::PacmanGraphics.Properties.Resources.coin;
-            this.pictureBox49.Location = new System.Drawing.Point(484, 272);
+            this.pictureBox49.Location = new System.Drawing.Point(562, 272);
             this.pictureBox49.Name = "pictureBox49";
             this.pictureBox49.Size = new System.Drawing.Size(25, 25);
             this.pictureBox49.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -724,7 +726,7 @@
             // pictureBox50
             // 
             this.pictureBox50.Image = global::PacmanGraphics.Properties.Resources.coin;
-            this.pictureBox50.Location = new System.Drawing.Point(435, 272);
+            this.pictureBox50.Location = new System.Drawing.Point(505, 272);
             this.pictureBox50.Name = "pictureBox50";
             this.pictureBox50.Size = new System.Drawing.Size(25, 25);
             this.pictureBox50.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -735,7 +737,7 @@
             // pictureBox51
             // 
             this.pictureBox51.Image = global::PacmanGraphics.Properties.Resources.coin;
-            this.pictureBox51.Location = new System.Drawing.Point(389, 272);
+            this.pictureBox51.Location = new System.Drawing.Point(449, 272);
             this.pictureBox51.Name = "pictureBox51";
             this.pictureBox51.Size = new System.Drawing.Size(25, 25);
             this.pictureBox51.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -754,6 +756,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(684, 562);
+            this.Controls.Add(this.pacman);
+            this.Controls.Add(this.pinkGhost);
+            this.Controls.Add(this.yellowGhost);
+            this.Controls.Add(this.redGhost);
             this.Controls.Add(this.pictureBox36);
             this.Controls.Add(this.pictureBox32);
             this.Controls.Add(this.pictureBox35);
@@ -800,10 +806,6 @@
             this.Controls.Add(this.pictureBox37);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox12);
-            this.Controls.Add(this.pacman);
-            this.Controls.Add(this.pinkGhost);
-            this.Controls.Add(this.yellowGhost);
-            this.Controls.Add(this.redGhost);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox3);
