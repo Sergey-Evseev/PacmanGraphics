@@ -15,13 +15,14 @@ namespace PacmanGraphics
     {
         bool goUp, goDown, goLeft, goRight, isGameOver;
         int score, playerSpeed, redGhostSpeed, yellowGhostSpeed,
-            pinkGhostX, pinkGhostY;
+            pinkGhostX, pinkGhostY; //скорости розового по X и Y
         
         public Form1()
         {
             InitializeComponent();
             resetGame(); //при загрузке формы игра в первоначальном состоянии
         }
+        
 
         private void keyIsDown(object sender, KeyEventArgs e)
         {
@@ -73,7 +74,8 @@ namespace PacmanGraphics
 
         private void mainGameTimer(object sender, EventArgs e)
         {
-            txtScore.Text = "Score: " + score;
+        //вывод заработанных очков
+        txtScore.Text = "Score: " + score;            
 
             if (goLeft)
             {   //при нажатии влево уменьшать координату X на скорость
@@ -141,9 +143,16 @@ namespace PacmanGraphics
 
                         //ДОПОЛН. поведение розового госта
                         if (pinkGhost.Bounds.IntersectsWith(x.Bounds))
-                        { //при столкновении с внутр. стенами менять направление                                                                             
-                            pinkGhostX = -pinkGhostX;                            
-                        }                        
+                        { //при столкновении с внутр. стенами менять гориз. направление                                                                             
+                            pinkGhostX = -pinkGhostX;
+
+                            //при этом если игрок попадает в стену с торца
+                            //то еще и менять вертикальную скорость
+                            if ((pinkGhost.Left > x.Left+5 && pinkGhost.Left < x.Right-5) ||
+                                    (pinkGhost.Right > x.Left+5 && pinkGhost.Right < x.Right-5))
+                            { pinkGhostY = -pinkGhostY;}
+                        }  
+                        
                     }
                     
                     //взаимодействие игрока с привидениями
@@ -168,7 +177,7 @@ namespace PacmanGraphics
                 redGhostSpeed = -redGhostSpeed;
                 }
 
-            //поведение желтого госта аналогично но движется в другую сторону
+            //поведение желтого госта аналогично но изнач. движется в другую сторону
             //(скорости каждого прописаны в resetGame())
             yellowGhost.Left -= yellowGhostSpeed;
             if (yellowGhost.Bounds.IntersectsWith(pictureBox3.Bounds) ||
@@ -179,7 +188,7 @@ namespace PacmanGraphics
             //поведение розового госта
             pinkGhost.Left -= pinkGhostX; //изменение гор. координаты
             pinkGhost.Top -= pinkGhostY; //изменение вертикальной координаты
-
+            //при приближении к границам формы движение меняется на противоположное
             if (pinkGhost.Top < 0 || pinkGhost.Top > 503)
             {
                 pinkGhostY = -pinkGhostY;
@@ -244,7 +253,7 @@ namespace PacmanGraphics
             pacman.Left = 31; //координаты героя в начале игры
             pacman.Top = 46;
             redGhost.Left = 189; redGhost.Top = 63;
-            pinkGhost.Left = 309; pinkGhost.Top = 252;
+            pinkGhost.Left = 342; pinkGhost.Top = 249;
             yellowGhost.Left = 444; yellowGhost.Top = 448;
 
             //сделать все элементы (coins) видимыми
@@ -255,7 +264,7 @@ namespace PacmanGraphics
                 }
 
             gameTimer.Start(); //таймер запускается
-        }
+        } //end of: resetGame() ========================
 
         //accepts message either 'win' or 'lost'
         private void gameOver(string message)
