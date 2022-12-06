@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
@@ -119,7 +120,7 @@ namespace PacmanGraphics
                 //на каждой итерации таймера
             {
                 if (x is PictureBox) //отбираем только пикчербоксы
-                {
+                { 
                     //ВЗАИМОДЕЙСТВИЕ С МОНЕТАМИ
                     //приводим к строке и сравниваем тег контрола
                     //счет увеличивается только когда объект видимый
@@ -146,14 +147,17 @@ namespace PacmanGraphics
                         { //при столкновении с внутр. стенами менять гориз. направление                                                                             
                             pinkGhostX = -pinkGhostX;
 
-                            //при этом если игрок попадает в стену с торца
+                            //при этом если гост попадает в стену с торца
                             //то еще и менять вертикальную скорость
                             if ((pinkGhost.Left > x.Left+5 && pinkGhost.Left < x.Right-5) ||
                                     (pinkGhost.Right > x.Left+5 && pinkGhost.Right < x.Right-5))
-                            { pinkGhostY = -pinkGhostY;}
-                        }  
-                        
-                    }
+                            {
+                                pinkGhostX = -pinkGhostX;
+                                pinkGhostY = -pinkGhostY;
+                            }                            
+                        }                       
+                    } //конец взаимодействия с внутренними стенами
+                                        
                     
                     //взаимодействие игрока с привидениями
                     if ((string)x.Tag == "ghost")
@@ -162,6 +166,15 @@ namespace PacmanGraphics
                         {
                             gameOver("You lost!");
                         }
+                        //!!!столконовение розового госта с остальными
+                        if (pinkGhost.Bounds.IntersectsWith(redGhost.Bounds) ||
+                        pinkGhost.Bounds.IntersectsWith(yellowGhost.Bounds))
+                        {
+                            Random random = new Random();
+                            pinkGhostX = (-pinkGhostX + random.Next(0, 3));
+                            pinkGhostY = (-pinkGhostY + random.Next(0, 3));
+                        }
+                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     }
                 }    
             } // end of: foreach PictureBox
