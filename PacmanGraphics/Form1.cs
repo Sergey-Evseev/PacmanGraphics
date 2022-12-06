@@ -166,13 +166,22 @@ namespace PacmanGraphics
                         {
                             gameOver("You lost!");
                         }
-                        //!!!столконовение розового госта с остальными
+                        //!!!столкновение розового госта с остальными
                         if (pinkGhost.Bounds.IntersectsWith(redGhost.Bounds) ||
                         pinkGhost.Bounds.IntersectsWith(yellowGhost.Bounds))
                         {
                             Random random = new Random();
-                            pinkGhostX = (-pinkGhostX + random.Next(0, 3));
-                            pinkGhostY = (-pinkGhostY + random.Next(0, 3));
+                            pinkGhostX = (-pinkGhostX + random.Next(0, 2));
+                            pinkGhostY = (-pinkGhostY + random.Next(0, 2));
+
+                            //добавлено для отработки стокновений хостов торцами,
+                            //но непонятно работает ли 
+                            if ((pinkGhost.Left > x.Left + 5 && pinkGhost.Left < x.Right - 5) ||
+                                    (pinkGhost.Right > x.Left + 5 && pinkGhost.Right < x.Right - 5))
+                            {
+                                pinkGhostX = -pinkGhostX;
+                                pinkGhostY = -pinkGhostY;
+                            }
                         }
                         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     }
